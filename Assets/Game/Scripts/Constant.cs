@@ -10,4 +10,5 @@ public class Constant : MonoBehaviour
     public const string Anim_Die = "Die";
     public const string Tag_Ground = "Ground";
     public const string Tag_Obstacle = "Obstacle";
+    public const string Tag_Coin = "Coin";
 }

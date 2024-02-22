@@ -14,17 +14,14 @@ public class GroundSpawner : MonoBehaviour
     }
     public void SpawnTile()
     {
-        GameObject temp = Instantiate(groundTile[(Random.Range(0,groundTile.Length))],nextSpawnPoint,Quaternion.identity);
+        GameObject temp = Instantiate(groundTile[(Random.Range(1,groundTile.Length))],nextSpawnPoint,Quaternion.identity);
         temp.transform.parent=transform;
         nextSpawnPoint = temp.transform.GetChild(1).position;
     }
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            SpawnTile();
-        }
+        SpawnFirstGround();
     }
     public void RestartGround()
     {
@@ -33,9 +30,22 @@ public class GroundSpawner : MonoBehaviour
             Destroy(child.gameObject);
         }
         nextSpawnPoint = Vector3.zero;
+        SpawnFirstGround();
+    }
+    public void SpawnFirstGround()
+    {
         for (int i = 0; i < 5; i++)
         {
-            SpawnTile();
+            if (i == 0)
+            {
+                GameObject tempFirst = Instantiate(groundTile[0], nextSpawnPoint, Quaternion.identity);
+                tempFirst.transform.parent = transform;
+                nextSpawnPoint = tempFirst.transform.GetChild(1).position;
+            }
+            else
+            {
+                SpawnTile();
+            }
         }
     }
 }

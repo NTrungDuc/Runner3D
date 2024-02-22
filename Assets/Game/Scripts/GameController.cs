@@ -12,13 +12,22 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject Player;
     [SerializeField] private Button btnStart;
     [SerializeField] private Button btnOpenStore;
+    [SerializeField] private Text txtCoin;
+    private int coinCount;
+    private int saveCoin;
     [SerializeField] public GameObject restartPanel;
     [SerializeField] public GameObject store;
     public void StartGame()
     {
-        state = PlayerState.Moving;
+        StartCoroutine(waitStart());
+    }
+    public IEnumerator waitStart()
+    {
+        
         btnStart.transform.DOScale(0, 0);
         btnOpenStore.transform.DOScale(0, 1f);
+        yield return new WaitForSeconds(1f);
+        state = PlayerState.Moving;
     }
     public void RestartGame()
     {
@@ -43,9 +52,20 @@ public class GameController : MonoBehaviour
     {
         Application.Quit();
     }
+    public void PickUpsCoin()
+    {
+        coinCount += 1;
+        txtCoin.text = "COIN:" + coinCount.ToString();
+        PlayerPrefs.SetInt("saveCoin", coinCount);
+    }
     private void Awake()
     {
         instance = this;
+    }
+    private void Start()
+    {
+        saveCoin = PlayerPrefs.GetInt("saveCoin", 0);
+        txtCoin.text = "COIN:" + saveCoin;
     }
 }
 public enum PlayerState
