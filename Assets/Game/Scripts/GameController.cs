@@ -67,6 +67,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         saveCoin = PlayerPrefs.GetInt("saveCoin", 0);
+        coinCount = saveCoin;
         txtCoin.text = "COIN:" + saveCoin;
     }
 }
