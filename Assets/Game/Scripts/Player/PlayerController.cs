@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        //MovementA();
-        Movement();
+        MovementA();
+        //Movement();
     }
     void MovementA()
     {
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
                         rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
                         isGrounded = false;
                     }
-                    else
+                    else if(swipeDirection.y < 0 && isGrounded)
                     {
                         //sliding
                     }

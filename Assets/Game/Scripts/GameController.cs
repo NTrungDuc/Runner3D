@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     private int saveCoin;
     [SerializeField] public GameObject restartPanel;
     [SerializeField] public GameObject store;
+    [SerializeField] private AudioSource soundCoin;
     public void StartGame()
     {
         StartCoroutine(waitStart());
@@ -56,6 +57,7 @@ public class GameController : MonoBehaviour
     {
         coinCount += 1;
         txtCoin.text = "COIN:" + coinCount.ToString();
+        soundCoin.Play();
         PlayerPrefs.SetInt("saveCoin", coinCount);
     }
     private void Awake()
